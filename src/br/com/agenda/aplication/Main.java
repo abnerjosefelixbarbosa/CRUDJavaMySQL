@@ -34,11 +34,22 @@ public class Main {
                     
             System.out.println(res);
         }
-    }  
+    }
+    
+    public static void AlterarContatos() {
+        var c = new Contatos();
+        c.setIdcontatos(1);
+        c.setNomecontatos("Tarta Xouto");
+        c.setIdadecontatos(36);
+        c.setDatacadastro(new Date());
+        var cd = new AgendaDAO();
+        cd.Update(c);
+    }
     
     public static void main(String[] args) throws Exception {
         //TesteConexao();
         //CadastrarContatos();
         //ListarContatos();
+        AlterarContatos();
     }
 }

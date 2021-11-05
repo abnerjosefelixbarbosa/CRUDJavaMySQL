@@ -6,8 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendaDAO {
-    
+public class AgendaDAO {    
     public void Save(Contatos dados) {
         String sql = "insert into contatos(nomecontatos,idadecontatos,datacadastro) values (?,?,?)";
         Connection conn = null;
@@ -35,8 +34,7 @@ public class AgendaDAO {
                 e.printStackTrace();
             }
         }
-    }
-    
+    }    
     public List<Contatos> getContatos() {
         List<Contatos> lista = new ArrayList<Contatos>();
         String sql = "select * from contatos";
@@ -76,4 +74,34 @@ public class AgendaDAO {
         
         return lista;
     } 
+    public void Update(Contatos dados) {
+        String sql = "update contatos set nomecontatos = ?,idadecontatos = ?,datacadastro = ? where idcontatos = ?";
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        
+        try {
+          conn = new ConnectionFactory().ConnectionToMySQL();
+          pstm = conn.prepareStatement(sql);
+          pstm.setString(1, dados.getNomecontatos());
+          pstm.setInt(2, dados.getIdadecontatos());
+          pstm.setDate(3, new Date(dados.getDatacadastro().getTime()));
+          pstm.setInt(4, dados.getIdcontatos());
+          pstm.execute();
+          System.out.println("Agenda atualizada!");
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+  
+        }
+    }    
 }
