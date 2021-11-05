@@ -22,11 +22,23 @@ public class Main {
         c.setIdadecontatos(40);
         c.setDatacadastro(new Date());
         var cd = new AgendaDAO();
+        
         cd.Save(c);
+    }
+    
+    public static void ListarContatos() {
+        var cd = new AgendaDAO();
+        
+        for (Contatos c: cd.getContatos()) {
+            var res = String.format("Nome do contato: %s", c.getNomecontatos());
+                    
+            System.out.println(res);
+        }
     }  
     
     public static void main(String[] args) throws Exception {
         //TesteConexao();
-        CadastrarContatos();
+        //CadastrarContatos();
+        //ListarContatos();
     }
 }

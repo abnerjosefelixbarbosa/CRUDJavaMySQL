@@ -9,5 +9,5 @@ create table if not exists contatos(
 )
 
 insert into contatos(nomecontatos,idadecontatos,datacadastro) values (?,?,?)
- 
+select * from contatos 
 
